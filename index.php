@@ -39,10 +39,10 @@
         ],
 
     ];
-    foreach($hotels as $hotel) {
-        $nome = $hotels['$name'];
-        $descrizione = $hotels['$description'];
-    }
+    // foreach($hotels as $hotel) {
+    //     $nome = $hotels['$name'];
+    //     $descrizione = $hotels['$description'];
+    // }
 
 ?>
 
@@ -66,9 +66,12 @@
     <div>
         <ul>
             <?php foreach($hotels as $hotel): ?>
-                <!-- <li> <?php print_r($hotel)  ?> </li> -->
-                <li> <?php print_r ($hotels[0]['name'])  ?> bubu</li>
-                <li> <?php print_r ($hotels[$nome])  ?> bubu</li>
+                
+                <li> <?php echo ($hotel['name'])  ?> </li>
+                <li> <?php echo ($hotel['description'])  ?> </li>
+               <li> <?php echo $hotel['parking'] ? 'Sì' : 'No' ?> </li>
+                <li> <?php echo ($hotel['vote'])  ?> </li>
+                <li> <?php echo ($hotel['distance_to_center'])  ?> </li>
             <?php endforeach; ?>     
             <!-- <li></li>
             <li></li>
