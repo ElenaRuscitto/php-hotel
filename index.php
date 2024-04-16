@@ -40,6 +40,25 @@
 
     ];
 
+// se non è stata settata la variabile $_POST['parking'] stampo tutti gli hotel, altrimenti solo quelli che hanno $_POST['parking'] == true
+
+// imposto di default il voto = 0 
+$vote = isset($_POST['vote']) ? $_POST['vote'] : 0;
+
+if(!isset($_POST['parking'])){
+  foreach($hotels as $hotel){
+    if($hotel['vote'] >= $vote){
+      $filtered_hotels[] = $hotel;
+    }
+  }
+}else{
+  foreach($hotels as $hotel){
+    if($hotel['parking'] && $hotel['vote'] >= $vote){
+      $filtered_hotels[] = $hotel;
+    }
+  }
+}
+
 
 ?>
 
@@ -61,10 +80,31 @@
 
 <div class="container">
 <h1 class="text-center">Hotel disponibili</h1>
+
+
+<form action="index.php" method="POST">
+    <div class="d-flex py-4">
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="parking" name="parking">
+            <label class="form-check-label" for="parking">
+            Solo con parcheggio
+            </label>
+            </div>
+            <div class="mx-5">
+                Voto:
+                <?php for($i = 0; $i <= 5; $i++): ?>
+                    <input class="form-check-input" type="radio" name="vote" id="vote<?php echo $i ?>" value="<?php echo $i ?>">
+                    <label class="form-check-label me-3" for="vote<?php echo $i ?>"> <?php echo $i ?> </label>
+                    <?php endfor; ?>
+            </div>
+                    <button type="submit" class="btn btn-primary ">Filtra</button>
+    </div>
+</form>
+
     <div class="row">
       
         <div class="col d-flex ">
-          <?php foreach($hotels as $hotel): ?>
+          <?php foreach($filtered_hotels as $hotel): ?>
             
             <div class="card m-3" style="width: 18rem;">
             
